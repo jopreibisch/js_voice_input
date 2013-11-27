@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="Jo - voice input">
+		<meta name="author" content="Johannes Preibisch">
+		<title>Jo - voice programming</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<style type="text/css">
+			p {
+				position: relative;
+				top: 90px;
+				left: 100px;
+				width: 400px;
+			}
+			input {
+				position: relative;
+				top: 20px;
+				left: 100px;
+				width: 200px;
+			}
+			#target {
+				height: 100px;
+				width: 100px;
+				position: relative;
+				top: 80px;
+				left: 100px;
+				border: 1px solid #bbb;
+				background: #ddd;
+			}
+		</style>
+	</head>
+	<body>
+		<p>red, green, blue, yellow, left, right</p>
+		<input type="text" x-webkit-speech id="voiceInput"/>
+		<div id="target"></div>
+	</body>
+	<script type="text/javascript">
+		// get text after input
+		var field = document.querySelector('#voiceInput');
+		var target = $('#target');
+		field.onwebkitspeechchange = function(e) {
+		    var q = field.value.toUpperCase();
+		    // do stuff
+		   if(q.search('RED') >= 0) {
+		    	target.css('background', 'red');
+		    } 
+		    if(q.search('GREEN') >= 0) {
+		    	target.css('background', 'green');
+		    } 
+		    if(q.search('BLUE') >= 0) {
+		    	target.css('background', 'blue');
+		    }
+		    if(q.search('YELLOW') >= 0) {
+		    	target.css('background', 'yellow');
+		    } 
+		    if(q.search('LEFT') >= 0) {
+		    	target.animate({
+			       left: "+=100"
+			  }, 300);
+		    } 
+		    if(q.search('RIGHT') >= 0) {
+		    	target.animate({
+			       left: "-=100"
+			  }, 300);
+		    };
+		    console.log(e); // SpeechInputEvent
+		    console.log(q);
+		};
+	</script>
+</html>
